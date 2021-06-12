@@ -130,8 +130,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-API_KEYS = ["AIzaSyC7hQuV0H1QVIOV5bWo5mLEixRZqF75r1w", "AIzaSyAm9Z_wB1TUk5iYv_5zrStQvWM5hMcpLCc",
-            "AIzaSyB3Id9qxKr4II21WSFJ6OUPFI2JBlEDsD4", "AIzaSyDzelk6d8DViYRvXQZ4ERMKAkXmmW7mqRU"]
+API_KEYS = ["AIzaSyC7hQuV0H1QVIOV5bWo5mLEixRZqF75r1w", "AIzaSyD8q59RY0x2QyCNhAdNfT7WfCcilo-_2HQ",
+            "AIzaSyBC__cPutuK-5Pk13MxLWi5vkoKL0ZnZ4M", "AIzaSyDzelk6d8DViYRvXQZ4ERMKAkXmmW7mqRU"]
 BROKER_URL = 'redis://rd01:6379'
 CELERY_RESULT_BACKEND = 'redis://rd01:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
