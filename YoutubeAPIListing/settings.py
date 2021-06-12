@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessigitons',
+    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'search_video'
@@ -121,3 +121,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 API_KEYS = ["AIzaSyC7hQuV0H1QVIOV5bWo5mLEixRZqF75r1w", "AIzaSyAm9Z_wB1TUk5iYv_5zrStQvWM5hMcpLCc",
             "AIzaSyB3Id9qxKr4II21WSFJ6OUPFI2JBlEDsD4", "AIzaSyDzelk6d8DViYRvXQZ4ERMKAkXmmW7mqRU"]
+BROKER_URL = 'redis://rd01:6379'
+CELERY_RESULT_BACKEND = 'redis://rd01:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
