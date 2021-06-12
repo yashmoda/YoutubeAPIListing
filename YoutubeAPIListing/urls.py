@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from search_video.views import get_list
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('get/', get_list),
 ]

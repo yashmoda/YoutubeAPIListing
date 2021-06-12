@@ -6,7 +6,7 @@ from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'YoutubeAPI.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'YoutubeAPIListing.settings')
 app = Celery('YoutubeAPIListing')
 
 # Using a string here means the worker will not have to
