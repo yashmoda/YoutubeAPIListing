@@ -1,6 +1,6 @@
 # YoutubeAPIListing
 
-This project would call the Youtube API in the background asynchronously with the help of Celery. This would get the videos related to a particular search query (i.e. "Stocks" for the time being) and load some details returned by it into the PostgreSQL database.
+This project would call the Youtube API in the background asynchronously with the help of Celery. This would get the videos related to a particular search query (i.e. "Stocks" for the time being) and load some details returned by it into the PostgreSQL database. The Youtube API is called every 5 minutes.
 
 There is a GET API which returns the list of all videos that are available in the database if no search query is specified and if a search query is specified then it returns all the videos corresponding to that particular search query in a paginated format which is sorted in descending order of published datetime. The project has been dockerised so it can be installed and run anywhere without any issues.
 
