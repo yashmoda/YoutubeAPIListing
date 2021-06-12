@@ -17,7 +17,7 @@ def get_list(request):
         else:
             search_query = search_query.replace(" ", " & ")
             query = SearchQuery(search_query)
-            vector = SearchVector('title')
+            vector = SearchVector('title') + SearchVector('description')
             video_list = VideoData.objects.annotate(search=vector).filter(search=query)
         paginator = Paginator(video_list, 20)
         videos = paginator.page(page)
