@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Videos</title>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            query = localStorage.getItem("query");
+            if (query!=null)
+            {
+                document.getElementById("query").setAttribute('value', query);
+            }
+            $("#query").on('keypress',function(e) {
+                if(e.which == 13) {
+                    $("#submit_btn").click();
+                }
+            });
+        });
+        function getVideos(page)
+        {
+            query = $("#query").val();
+            localStorage.setItem("query", query);
+            window.location.href = "http://127.0.0.1:8000/get/?query="+query+"&page="+page;
+        }
+    </script>
+</head>
+<body>
+<div class="wrap center">
+    <div class="search">
+        <input type="text" class="searchTerm" style="width: 30%" placeholder="What are you looking for?" id="query">
+        <a class="waves-effect waves-light btn" onclick="getVideos(1)" id="submit_btn"><i class="material-icons">search</i></a>
+    </div>
+</div>
+<div id="video_data" class="row">
+    {% for video in videos %}
+    <div class="col s12 m6 l6">
+        <div class="card horizontal">
+            <div class="card-image">
+                <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}">
+            </div>
+            <div class="card-stacked" style="height: 400px; overflow: auto">
+                <div class="card-content">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td><b>Title: </b></td>
+                            <td>{{ video.title }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Description: </b></td>
+                            <td>{{ video.description }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Publisher: </b></td>
+                            <td>{{ video.publisher }}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Published At: </b></td>
+                            <td>{{ video.published_at }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="center">
+    {% if videos.has_other_pages %}
+    <ul class="pagination">
+        {% if videos.has_previous %}
+        <li><a onclick="getVideos({{ videos.previous_page_number }})"><i class="material-icons">chevron_left</i></a></li>
+        {% else %}
+        <li class="disabled"><i class="material-icons">chevron_left</i></li>
+        {% endif %}
+        {% for i in videos.paginator.page_range %}
+        {% if videos.number == i %}
+        <li class="active">{{ i }}</li>
+        {% else %}
+        <li class="waves-effect"><a onclick="getVideos({{ i }})">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if videos.has_next %}
+        <li class="waves-effect"><a onclick="getVideos({{ videos.next_page_number }})"><i
+                class="material-icons">chevron_right</i></a></li>
+        {% else %}
+        <li class="disabled"><i class="material-icons">chevron_right</i></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</div>
+
+
+</div>
+</body>
+</html>

@@ -10,11 +10,11 @@ from django.apps import apps
 r = redis.Redis(host="rd01", port=6379)
 
 
-@periodic_task(run_every=(crontab(minute='*/3')), name="load_video_info", ignore_result=True)
+@periodic_task(run_every=(crontab(minute='*/5')), name="load_video_info", ignore_result=True)
 def add_video_info(url=""):
     print("Starting task at: ")
     print(datetime.now())
-    search_keyword = "Cryptocurrency"
+    search_keyword = "Stocks"
     api_model = apps.get_model(app_label='search_video', model_name='APIKeys')
     api_key_count = api_model.objects.count()
     # print(api_key_count)
@@ -25,9 +25,9 @@ def add_video_info(url=""):
     if not r.exists("published_after"):
         published_after = datetime.now() + timedelta(hours=-2)
         published_after = str(published_after.strftime('%Y-%m-%dT%H:%M:%SZ'))
-        r.set("published_after", published_after).decode("utf-8")
+        r.set("published_after", published_after)
     else:
-        published_after = r.get("published_after")
+        published_after = r.get("published_after").decode("utf-8")
     # print("--------Published After--------------")
     # print(type(published_after))
     if url == "":
